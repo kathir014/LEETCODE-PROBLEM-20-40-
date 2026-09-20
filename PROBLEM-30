@@ -1,0 +1,55 @@
+import java.util.*;
+
+class Solution {
+    public List<Integer> findSubstring(String s, String[] words) {
+
+        List<Integer> result = new ArrayList<>();
+
+        int wordLength = words[0].length();
+        int wordCount = words.length;
+        int totalLength = wordLength * wordCount;
+
+        // Store how many times each word should appear
+        HashMap<String, Integer> map = new HashMap<>();
+
+        for (String word : words) {
+            map.put(word, map.getOrDefault(word, 0) + 1);
+        }
+
+        // Check every possible starting position
+        for (int i = 0; i <= s.length() - totalLength; i++) {
+
+            HashMap<String, Integer> current = new HashMap<>();
+
+            int j = 0;
+
+            while (j < wordCount) {
+
+                int start = i + j * wordLength;
+
+                String word = s.substring(start, start + wordLength);
+
+                // Word doesn't exist in words[]
+                if (!map.containsKey(word)) {
+                    break;
+                }
+
+                current.put(word, current.getOrDefault(word, 0) + 1);
+
+                // Word appears too many times
+                if (current.get(word) > map.get(word)) {
+                    break;
+                }
+
+                j++;
+            }
+
+            // All words matched
+            if (j == wordCount) {
+                result.add(i);
+            }
+        }
+
+        return result;
+    }
+}
