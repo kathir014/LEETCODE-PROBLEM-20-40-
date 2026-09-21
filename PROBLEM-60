@@ -1,0 +1,41 @@
+import java.util.*;
+
+class Solution {
+    public String getPermutation(int n, int k) {
+
+        List<Integer> numbers = new ArrayList<>();
+
+        // Store 1 to n
+        for (int i = 1; i <= n; i++) {
+            numbers.add(i);
+        }
+
+        String result = "";
+
+        // Make k zero-based
+        k--;
+
+        for (int i = n; i >= 1; i--) {
+
+            // Calculate (i - 1)!
+            int fact = 1;
+
+            for (int j = 1; j < i; j++) {
+                fact = fact * j;
+            }
+
+            // Find index
+            int index = k / fact;
+
+            result = result + numbers.get(index);
+
+            // Remove used number
+            numbers.remove(index);
+
+            // Find remaining k
+            k = k % fact;
+        }
+
+        return result;
+    }
+}
