@@ -1,0 +1,21 @@
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+
+        List<List<Integer>> arr = new ArrayList<>();
+
+        List<Integer> a = new ArrayList<>();
+        a.add(2);
+        a.add(2);
+        a.add(3);
+
+        List<Integer> b = new ArrayList<>();
+        b.add(7);
+
+        arr.add(a);
+        arr.add(b);
+
+        System.out.println(arr);
+    }
+}
